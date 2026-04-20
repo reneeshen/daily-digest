@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7f5ef">
-<title>04.20 每日精選</title>
+<title>每日精選</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
@@ -75,6 +75,9 @@ body[data-lang="en"] .take::before{content:"Take"}
 .foot button:active{background:var(--card)}
 .hint{text-align:center;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-3);padding-top:20px}
 
+.loading{text-align:center;padding:60px 20px;color:var(--ink-3);font-size:12px;letter-spacing:0.16em;text-transform:uppercase}
+.err{text-align:center;padding:60px 20px;color:var(--accent);font-size:13px;line-height:1.6}
+
 @media(min-width:680px){
   body{padding:40px 28px 80px;max-width:640px}
   h1{font-size:30px}
@@ -86,9 +89,12 @@ body[data-lang="en"] .take::before{content:"Take"}
 </head>
 <body data-lang="zh" data-topic="invest">
 
+<div id="root"><div class="loading">載入中 · Loading…</div></div>
+
+<template id="shell">
 <header>
   <div class="brow">
-    <span>No. 002 — 2026.04.20</span>
+    <span data-slot="issue"></span>
     <div class="lang-sw" id="langsw">
       <button class="on" data-l="zh">中</button>
       <button data-l="en">EN</button>
@@ -99,165 +105,110 @@ body[data-lang="en"] .take::before{content:"Take"}
   <div class="sub sub-design zh">AI × UXUI · PM · Tech</div>
   <div class="sub sub-design en">AI × UXUI · PM · Tech</div>
   <div class="sub sub-invest zh">投資 · 總經 · 科技股</div>
-  <div class="sub sub-invest en">Investment · Macro · Tech Stocks</div>
 </header>
 
 <div class="topic-sw" id="topicsw">
-  <button data-t="design"><span class="zh">設計 · AI</span><span class="en">Design · AI</span><span class="cnt">10</span></button>
-  <button class="on" data-t="invest"><span class="zh">投資 · 總經</span><span class="en">Invest · Macro</span><span class="cnt">5</span></button>
+  <button data-t="design"><span class="zh">設計 · AI</span><span class="en">Design · AI</span><span class="cnt" data-cnt="design">0</span></button>
+  <button class="on" data-t="invest"><span class="zh">投資 · 總經</span><span class="cnt" data-cnt="invest">0</span></button>
 </div>
 
-<nav id="tabs">
-  <!-- DESIGN TABS -->
-  <button class="tab t-design" data-topic="design" data-i="d0"><span class="pri">◇</span><span class="zh">本日趨勢</span><span class="en">Today</span></button>
-  <button class="tab t-design" data-topic="design" data-i="d1"><span class="pri">01</span><span class="zh">Figma Skills</span><span class="en">Figma Skills</span></button>
-  <button class="tab t-design" data-topic="design" data-i="d2"><span class="pri">02</span><span class="zh">Stitch 進化</span><span class="en">Stitch Evolves</span></button>
-  <button class="tab t-design" data-topic="design" data-i="d3"><span class="pri">03</span><span class="zh">AI 疲勞</span><span class="en">AI Fatigue</span></button>
-  <!-- INVEST TABS -->
-  <button class="tab active t-invest" data-topic="invest" data-i="i0"><span class="pri">◇</span><span class="zh">本日總經</span><span class="en">Macro Take</span></button>
-  <button class="tab t-invest" data-topic="invest" data-i="i1"><span class="pri">01</span><span class="zh">Fed 會議</span><span class="en">Fed Meeting</span></button>
-  <button class="tab t-invest" data-topic="invest" data-i="i2"><span class="pri">02</span><span class="zh">台積電 Q1</span><span class="en">TSMC Q1</span></button>
-  <button class="tab t-invest" data-topic="invest" data-i="i3"><span class="pri">03</span><span class="zh">美元指數</span><span class="en">DXY</span></button>
-  <button class="tab t-invest" data-topic="invest" data-i="i4"><span class="pri">04</span><span class="zh">半導體 ETF</span><span class="en">Chip ETFs</span></button>
-</nav>
-
-<!-- ========== DESIGN CARDS ========== -->
-<article class="card t-design" data-topic="design" data-i="d0">
-  <div class="meta"><span class="dot tr"></span><span class="ac zh">本日趨勢觀察</span><span class="ac en">Daily Take</span><span class="sep">/</span><span>04.20</span></div>
-  <h2 class="zh">Agent 進駐設計檔，使用者開始反彈</h2>
-  <h2 class="en">Agents Move Into Design Files, Users Push Back</h2>
-  <div class="rule"></div>
-  <div class="trend zh">
-    <p>這週兩個方向撞一起：一邊 Figma 把 MCP 打開讓 AI agent 直接改檔案、Google Stitch 導入 DESIGN.md 格式。</p>
-    <p>另一邊 NN/g 連發兩篇提醒——使用者已經「AI 疲勞」，想看得出是人做的設計。</p>
-  </div>
-  <div class="trend en">
-    <p>Two currents collided this week: Figma opened its MCP so agents can modify files directly, and Google Stitch rolled out DESIGN.md.</p>
-    <p>Meanwhile NN/g published twice on the opposite signal: users are AI-fatigued and want designs that look human-made.</p>
-  </div>
-</article>
-
-<article class="card t-design" data-topic="design" data-i="d1">
-  <div class="meta"><span class="dot p1"></span><span class="ac">P1 · AI × UXUI</span><span class="sep">/</span><span>EN</span><span class="sep">/</span><span>Figma Blog</span></div>
-  <h2 class="zh">Figma 開放 MCP：AI agent 直接寫你的設計檔</h2>
-  <h2 class="en">Figma Opens MCP: Agents Write to Your Files</h2>
-  <div class="rule"></div>
-  <p class="sum zh">Figma 大幅升級 AI：MCP server 讓外部 agent 直接讀寫 Figma 檔案。同步推出 Skills——用 Markdown 寫的指令集。</p>
-  <p class="sum en">Figma's biggest AI push yet: MCP server lets external agents read and write Figma files, paired with Skills — Markdown instruction sets.</p>
-  <p class="take zh">關鍵不是 AI，是 MCP——你的 design system 現在是 agent 可讀的 API。</p>
-  <p class="take en">The news isn't AI, it's MCP — your design system is now a readable API for any agent.</p>
-  <a class="link zh" href="https://www.figma.com/release-notes/" target="_blank">閱讀原文 →</a>
-  <a class="link en" href="https://www.figma.com/release-notes/" target="_blank">Read article →</a>
-</article>
-
-<article class="card t-design" data-topic="design" data-i="d2">
-  <div class="meta"><span class="dot p1"></span><span class="ac">P1 · AI × UXUI</span><span class="sep">/</span><span>EN</span><span class="sep">/</span><span>UXPin</span></div>
-  <h2 class="zh">Google Stitch 丟出 DESIGN.md</h2>
-  <h2 class="en">Google Stitch Drops DESIGN.md</h2>
-  <div class="rule"></div>
-  <p class="sum zh">Google Stitch 導入 DESIGN.md——用自然語言檔案記錄介面設計。Figma 股價一天跌 4%。</p>
-  <p class="sum en">Google Stitch introduced DESIGN.md — a natural-language file format for interface design. Figma shares dropped 4%.</p>
-  <p class="take zh">如果 DESIGN.md 變成 OpenAPI 級的標準，遊戲規則就變了。</p>
-  <p class="take en">If DESIGN.md becomes an OpenAPI-level standard, the rules change.</p>
-  <a class="link zh" href="https://www.uxpin.com/studio/blog/google-stitch-ai-design-tool-updates-ui-ux/" target="_blank">閱讀原文 →</a>
-  <a class="link en" href="https://www.uxpin.com/studio/blog/google-stitch-ai-design-tool-updates-ui-ux/" target="_blank">Read article →</a>
-</article>
-
-<article class="card t-design" data-topic="design" data-i="d3">
-  <div class="meta"><span class="dot p1"></span><span class="ac">P1 · AI × UXUI</span><span class="sep">/</span><span>EN</span><span class="sep">/</span><span>NN/g</span></div>
-  <h2 class="zh">NN/g：使用者想看「人做的設計」</h2>
-  <h2 class="en">NN/g: Users Want Human-Made Designs</h2>
-  <div class="rule"></div>
-  <p class="sum zh">AI 內容到處都是之後，「AI 疲勞」成主流情緒。</p>
-  <p class="sum en">As AI-generated everything saturates, "AI fatigue" becomes the dominant user mood.</p>
-  <p class="take zh">工具越自動，人味越值錢。</p>
-  <p class="take en">The more automated the tooling, the more a human signature is worth.</p>
-  <a class="link zh" href="https://www.nngroup.com/articles/" target="_blank">閱讀原文 →</a>
-  <a class="link en" href="https://www.nngroup.com/articles/" target="_blank">Read article →</a>
-</article>
-
-<!-- ========== INVEST CARDS ========== -->
-<article class="card active t-invest" data-topic="invest" data-i="i0">
-  <div class="meta"><span class="dot tr"></span><span class="ac zh">本日總經觀察</span><span class="ac en">Macro Take</span><span class="sep">/</span><span>04.20</span></div>
-  <h2 class="zh">Fed 會前靜默期，科技股等待催化</h2>
-  <h2 class="en">Pre-FOMC Quiet Period, Tech Awaits Catalyst</h2>
-  <div class="rule"></div>
-  <div class="disclaimer zh">※ 僅為事件解讀與趨勢脈絡，不構成投資建議</div>
-  <div class="disclaimer en">※ Event context and trend reading only · not investment advice</div>
-  <div class="trend zh">
-    <p>本週焦點：Fed 下週 FOMC 會議前的靜默期開始，市場預期升息路徑將維持。核心 PCE 數據公布後，美元指數走弱對新興市場與台股中長線偏正面。</p>
-    <p>台股這邊，台積電法說會後外資連續買超，AI 伺服器需求能見度延伸到 2027。半導體供應鏈本週輪動明顯。</p>
-  </div>
-  <div class="trend en">
-    <p>Focus this week: Fed enters pre-FOMC quiet period; market prices in continued rate path. Core PCE release left DXY softer, historically supportive for EM and Taiwan equities.</p>
-    <p>Taiwan: foreign net-buying continued post-TSMC earnings call; AI server visibility now extends to 2027. Semi supply chain showed clear rotation.</p>
-  </div>
-</article>
-
-<article class="card t-invest" data-topic="invest" data-i="i1">
-  <div class="meta"><span class="dot p1"></span><span class="ac">P1 · 總經 × 科技</span><span class="sep">/</span><span class="zh">新聞</span><span class="en">News</span><span class="sep">/</span><span>ZH</span><span class="sep">/</span><span>經濟日報 · 04.19</span></div>
-  <h2 class="zh">Fed 下週 FOMC，市場聚焦點陣圖</h2>
-  <h2 class="en">Fed FOMC Next Week: Focus on the Dot Plot</h2>
-  <div class="rule"></div>
-  <p class="sum zh">範例文章：Fed 下週召開 FOMC，利率期貨反映本次按兵不動機率 96%。市場真正關注點在更新的點陣圖與主席記者會對中長期利率路徑的措辭，科技股估值對此特別敏感。</p>
-  <p class="sum en">Example: Fed meets next week; rate futures put hold probability at 96%. Real focus is the updated dot plot and chair's language on the medium-term rate path — tech valuations are especially sensitive here.</p>
-  <p class="take zh">科技股估值對利率預期變化的敏感度是目前最主要的 macro beta。會後首日反應是方向指標。</p>
-  <p class="take en">Tech-valuation sensitivity to rate-expectation shifts is the dominant macro beta now. First-day post-meeting reaction sets the near-term direction.</p>
-  <a class="link zh" href="https://money.udn.com/" target="_blank">閱讀原文 →</a>
-  <a class="link en" href="https://money.udn.com/" target="_blank">Read article →</a>
-</article>
-
-<article class="card t-invest" data-topic="invest" data-i="i2">
-  <div class="meta"><span class="dot p2"></span><span class="ac">P2 · 台股</span><span class="sep">/</span><span class="zh">新聞</span><span class="en">News</span><span class="sep">/</span><span>ZH</span><span class="sep">/</span><span>工商時報 · 04.18</span></div>
-  <h2 class="zh">台積電法說：AI 伺服器能見度延伸到 2027</h2>
-  <h2 class="en">TSMC Earnings: AI Server Visibility Extends to 2027</h2>
-  <div class="rule"></div>
-  <p class="sum zh">範例文章：台積電 Q1 法說會後，外資調升目標價，重點在 2nm 量產節奏與 AI 客戶訂單能見度延伸至 2027。CoWoS 產能仍供不應求。</p>
-  <p class="sum en">Example: Post-Q1 earnings call, foreign houses raised price targets. Key takeaways: 2nm ramp pace and AI customer order visibility now extending to 2027. CoWoS capacity remains tight.</p>
-  <p class="take zh">Capex 指引與 CoWoS 擴產節奏是供應鏈整年度最重要的 anchor，值得全文讀。</p>
-  <p class="take en">Capex guidance and CoWoS ramp are the anchor for the whole supply chain's year — worth reading in full.</p>
-  <a class="link zh" href="https://ctee.com.tw/" target="_blank">閱讀原文 →</a>
-  <a class="link en" href="https://ctee.com.tw/" target="_blank">Read article →</a>
-</article>
-
-<article class="card t-invest" data-topic="invest" data-i="i3">
-  <div class="meta"><span class="dot p3"></span><span class="ac">P3 · 總經</span><span class="sep">/</span><span class="zh">新聞</span><span class="en">News</span><span class="sep">/</span><span>ZH</span><span class="sep">/</span><span>鉅亨網 · 04.19</span></div>
-  <h2 class="zh">美元指數跌破支撐，新台幣回升</h2>
-  <h2 class="en">DXY Breaks Support, TWD Rebounds</h2>
-  <div class="rule"></div>
-  <p class="sum zh">範例文章：美元指數本週跌破 104 關鍵支撐。美元走弱階段，台幣與韓元通常同步回升，歷史上對台股外資回流是偏正面訊號。</p>
-  <p class="sum en">Example: DXY broke 104 key support this week. In DXY-down phases, TWD and KRW typically strengthen together — historically a supportive signal for foreign inflows into Taiwan equities.</p>
-  <p class="take zh">DXY 方向對外資動向影響大，是追蹤台股中期資金流的先行指標之一。</p>
-  <p class="take en">DXY direction drives foreign flows — one of the leading indicators for mid-term Taiwan equity flows worth tracking.</p>
-  <a class="link zh" href="https://news.cnyes.com/" target="_blank">閱讀原文 →</a>
-  <a class="link en" href="https://news.cnyes.com/" target="_blank">Read article →</a>
-</article>
-
-<article class="card t-invest" data-topic="invest" data-i="i4">
-  <div class="meta"><span class="dot p4"></span><span class="ac">P4 · 市場</span><span class="sep">/</span><span class="zh">新聞</span><span class="en">News</span><span class="sep">/</span><span>ZH</span><span class="sep">/</span><span>MoneyDJ · 04.18</span></div>
-  <h2 class="zh">半導體 ETF 資金流向：SMH vs SOXX</h2>
-  <h2 class="en">Chip ETF Flows: SMH vs SOXX</h2>
-  <div class="rule"></div>
-  <p class="sum zh">範例文章：本週 SMH 淨流入 $380M、SOXX 淨流出 $120M，反映資金傾向集中於頭部權值。台灣 00891 與美股 SMH 相關係數過去 60 日為 0.87。</p>
-  <p class="sum en">Example: SMH saw $380M net inflows this week while SOXX saw $120M outflows — signaling concentration in top-weight names. Taiwan's 00891 vs SMH 60-day correlation: 0.87.</p>
-  <p class="take zh">ETF 資金流向比個股消息更能反映真實資金偏好，是判斷輪動的輔助訊號。</p>
-  <p class="take en">ETF flows read real positioning better than single-stock headlines — useful for calling rotation.</p>
-  <a class="link zh" href="https://www.moneydj.com/" target="_blank">閱讀原文 →</a>
-  <a class="link en" href="https://www.moneydj.com/" target="_blank">Read article →</a>
-</article>
+<nav id="tabs"></nav>
+<main id="cards"></main>
 
 <div class="foot">
   <button id="prev"><span class="zh">← 上一篇</span><span class="en">← Prev</span></button>
   <button id="next"><span class="zh">下一篇 →</span><span class="en">Next →</span></button>
 </div>
 <div class="hint"><span class="zh">左右滑動切換　⌨ ← →</span><span class="en">Swipe to switch　⌨ ← →</span></div>
+</template>
 
 <script>
+const P_CLASS={P1:'p1',P2:'p2',P3:'p3',P4:'p4'};
+const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const paragraphs=t=>String(t||'').split(/\n\s*\n/).map(p=>`<p>${esc(p.trim())}</p>`).join('');
+
+function render(data){
+  const root=document.getElementById('root');
+  const shell=document.getElementById('shell').content.cloneNode(true);
+  root.innerHTML='';root.appendChild(shell);
+  document.querySelector('[data-slot="issue"]').textContent=`No. ${String(data.issue).padStart(3,'0')} — ${data.date}`;
+
+  const tabsEl=document.getElementById('tabs');
+  const cardsEl=document.getElementById('cards');
+
+  function renderTake(topic){
+    const t=data[topic].take;
+    const isZhOnly=topic==='invest';
+    const ac=isZhOnly?`<span class="ac">本日總經觀察</span>`:`<span class="ac zh">本日趨勢觀察</span><span class="ac en">Daily Take</span>`;
+    const disclaimer=isZhOnly?`<div class="disclaimer">※ 僅為事件解讀與趨勢脈絡，不構成投資建議</div>`:'';
+    const h2=isZhOnly?`<h2>${esc(t.title_zh)}</h2>`:`<h2 class="zh">${esc(t.title_zh)}</h2><h2 class="en">${esc(t.title_en||'')}</h2>`;
+    const body=isZhOnly?`<div class="trend">${paragraphs(t.body_zh)}</div>`:`<div class="trend zh">${paragraphs(t.body_zh)}</div><div class="trend en">${paragraphs(t.body_en||'')}</div>`;
+    return `<article class="card t-${topic}" data-topic="${topic}" data-i="${topic[0]}0">
+      <div class="meta"><span class="dot tr"></span>${ac}<span class="sep">/</span><span>${esc(data.date.slice(5))}</span></div>
+      ${h2}<div class="rule"></div>${disclaimer}${body}
+    </article>`;
+  }
+
+  function renderArticle(topic,a,idx){
+    const isZhOnly=topic==='invest';
+    const cls=P_CLASS[a.priority]||'p4';
+    const catZh=a.category_zh||a.category||'';
+    const catEn=a.category_en||a.category||'';
+    const typeZh=a.type_zh||a.type||'文章';
+    const typeEn=a.type_en||a.type||'Article';
+    const meta=isZhOnly
+      ? `<span class="dot ${cls}"></span><span class="ac">${esc(a.priority)} · ${esc(catZh)}</span><span class="sep">/</span><span>${esc(typeZh)}</span><span class="sep">/</span><span>${esc(a.lang||'ZH')}</span><span class="sep">/</span><span>${esc(a.source)} · ${esc(a.date)}</span>`
+      : `<span class="dot ${cls}"></span><span class="ac">${esc(a.priority)} · <span class="zh">${esc(catZh)}</span><span class="en">${esc(catEn)}</span></span><span class="sep">/</span><span class="zh">${esc(typeZh)}</span><span class="en">${esc(typeEn)}</span><span class="sep">/</span><span>${esc(a.lang||'EN')}</span><span class="sep">/</span><span>${esc(a.source)} · ${esc(a.date)}</span>`;
+    const h2=isZhOnly?`<h2>${esc(a.title_zh)}</h2>`:`<h2 class="zh">${esc(a.title_zh)}</h2><h2 class="en">${esc(a.title_en||a.title_zh)}</h2>`;
+    const sum=isZhOnly?`<p class="sum">${esc(a.summary_zh)}</p>`:`<p class="sum zh">${esc(a.summary_zh)}</p><p class="sum en">${esc(a.summary_en||'')}</p>`;
+    const take=isZhOnly?`<p class="take">${esc(a.take_zh)}</p>`:`<p class="take zh">${esc(a.take_zh)}</p><p class="take en">${esc(a.take_en||'')}</p>`;
+    const link=isZhOnly?`<a class="link" href="${esc(a.url)}" target="_blank" rel="noopener">閱讀原文 →</a>`:`<a class="link zh" href="${esc(a.url)}" target="_blank" rel="noopener">閱讀原文 →</a><a class="link en" href="${esc(a.url)}" target="_blank" rel="noopener">Read article →</a>`;
+    return `<article class="card t-${topic}" data-topic="${topic}" data-i="${topic[0]}${idx}">
+      <div class="meta">${meta}</div>${h2}<div class="rule"></div>${sum}${take}${link}
+    </article>`;
+  }
+
+  function renderTab(topic,a,idx){
+    const isTrend=idx===0;
+    const pri=isTrend?'◇':String(idx).padStart(2,'0');
+    const shortZh=isTrend?(topic==='invest'?'本日總經':'本日趨勢'):(a.tab_short_zh||esc(a.title_zh).slice(0,8));
+    const shortEn=isTrend?(topic==='invest'?'Macro':'Today'):(a.tab_short_en||a.tab_short_zh||'');
+    const content=topic==='invest'
+      ? `<span class="pri">${pri}</span><span>${esc(shortZh)}</span>`
+      : `<span class="pri">${pri}</span><span class="zh">${esc(shortZh)}</span><span class="en">${esc(shortEn)}</span>`;
+    return `<button class="tab t-${topic}" data-topic="${topic}" data-i="${topic[0]}${idx}">${content}</button>`;
+  }
+
+  // Build tabs + cards for design then invest (DOM order)
+  let tabsHtml='',cardsHtml='';
+  ['design','invest'].forEach(topic=>{
+    const t=data[topic];
+    tabsHtml+=renderTab(topic,null,0);
+    cardsHtml+=renderTake(topic);
+    (t.articles||[]).forEach((a,i)=>{
+      tabsHtml+=renderTab(topic,a,i+1);
+      cardsHtml+=renderArticle(topic,a,i+1);
+    });
+  });
+  tabsEl.innerHTML=tabsHtml;
+  cardsEl.innerHTML=cardsHtml;
+
+  document.querySelector('[data-cnt="design"]').textContent=1+(data.design.articles||[]).length;
+  document.querySelector('[data-cnt="invest"]').textContent=1+(data.invest.articles||[]).length;
+
+  // Activate first of default topic
+  const defaultTopic=data.defaultTopic||'invest';
+  document.body.dataset.topic=defaultTopic;
+  document.querySelectorAll('#topicsw button').forEach(x=>x.classList.toggle('on',x.dataset.t===defaultTopic));
+  wire();
+  go(0);
+}
+
 let cur=0,topic='invest';
 function list(){return Array.from(document.querySelectorAll('.tab[data-topic="'+topic+'"]'))}
 function cards(){return Array.from(document.querySelectorAll('.card[data-topic="'+topic+'"]'))}
 function go(i){
-  const L=list(),C=cards(),n=L.length;
+  const L=list(),C=cards(),n=L.length;if(!n)return;
   if(i<0)i=n-1;if(i>=n)i=0;cur=i;
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
@@ -265,40 +216,50 @@ function go(i){
   L[i].scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
   window.scrollTo({top:0,behavior:'instant'});
 }
-document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
-  const L=list();const idx=L.indexOf(t);if(idx>=0)go(idx);
-}));
-document.getElementById('prev').addEventListener('click',()=>go(cur-1));
-document.getElementById('next').addEventListener('click',()=>go(cur+1));
-document.addEventListener('keydown',e=>{
-  if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
-  if(e.key==='ArrowRight'||e.key==='j')go(cur+1);
-  else if(e.key==='ArrowLeft'||e.key==='k')go(cur-1);
-  else if(/^[1-9]$/.test(e.key)){const i=+e.key-1;if(i<list().length)go(i)}
-});
-let tx=0,ty=0;
-document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
-document.addEventListener('touchend',e=>{
-  const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
-  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){dx<0?go(cur+1):go(cur-1)}
-},{passive:true});
-document.getElementById('langsw').addEventListener('click',e=>{
-  const b=e.target.closest('button');if(!b)return;
-  const l=b.dataset.l;document.body.dataset.lang=l;
-  document.querySelectorAll('#langsw button').forEach(x=>x.classList.toggle('on',x.dataset.l===l));
-  document.documentElement.lang=l==='zh'?'zh-TW':'en';
-});
-document.getElementById('topicsw').addEventListener('click',e=>{
-  const b=e.target.closest('button');if(!b)return;
-  topic=b.dataset.t;document.body.dataset.topic=topic;
-  document.querySelectorAll('#topicsw button').forEach(x=>x.classList.toggle('on',x.dataset.t===topic));
-  if(topic==='invest'&&document.body.dataset.lang==='en'){
-    document.body.dataset.lang='zh';
-    document.querySelectorAll('#langsw button').forEach(x=>x.classList.toggle('on',x.dataset.l==='zh'));
-    document.documentElement.lang='zh-TW';
-  }
-  go(0);
-});
+function wire(){
+  topic=document.body.dataset.topic;
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+    const L=list();const idx=L.indexOf(t);if(idx>=0)go(idx);
+  }));
+  document.getElementById('prev').addEventListener('click',()=>go(cur-1));
+  document.getElementById('next').addEventListener('click',()=>go(cur+1));
+  document.addEventListener('keydown',e=>{
+    if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+    if(e.key==='ArrowRight'||e.key==='j')go(cur+1);
+    else if(e.key==='ArrowLeft'||e.key==='k')go(cur-1);
+    else if(/^[1-9]$/.test(e.key)){const i=+e.key-1;if(i<list().length)go(i)}
+  });
+  let tx=0,ty=0;
+  document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+  document.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){dx<0?go(cur+1):go(cur-1)}
+  },{passive:true});
+  document.getElementById('langsw').addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;
+    const l=b.dataset.l;document.body.dataset.lang=l;
+    document.querySelectorAll('#langsw button').forEach(x=>x.classList.toggle('on',x.dataset.l===l));
+    document.documentElement.lang=l==='zh'?'zh-TW':'en';
+  });
+  document.getElementById('topicsw').addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;
+    topic=b.dataset.t;document.body.dataset.topic=topic;
+    document.querySelectorAll('#topicsw button').forEach(x=>x.classList.toggle('on',x.dataset.t===topic));
+    if(topic==='invest'&&document.body.dataset.lang==='en'){
+      document.body.dataset.lang='zh';
+      document.querySelectorAll('#langsw button').forEach(x=>x.classList.toggle('on',x.dataset.l==='zh'));
+      document.documentElement.lang='zh-TW';
+    }
+    go(0);
+  });
+}
+
+fetch('data.json?v='+Date.now())
+  .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})
+  .then(render)
+  .catch(err=>{
+    document.getElementById('root').innerHTML=`<div class="err">無法載入資料<br>${esc(err.message)}</div>`;
+  });
 </script>
 </body>
 </html>
