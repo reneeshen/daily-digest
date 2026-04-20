@@ -27,6 +27,7 @@ h1{font-size:26px;font-weight:700;letter-spacing:-0.015em;line-height:1.15}
 .lang-sw{display:inline-flex;gap:2px}
 .lang-sw button{padding:3px 8px;background:transparent;border:0;font:inherit;font-size:10.5px;letter-spacing:0.14em;color:var(--ink-3);cursor:pointer;text-transform:uppercase}
 .lang-sw button.on{color:var(--ink);font-weight:600;border-bottom:1.5px solid var(--ink)}
+body[data-topic="invest"] .lang-sw button[data-l="en"]{opacity:0.28;pointer-events:none;cursor:not-allowed}
 
 .topic-sw{display:flex;margin:16px 0 10px;border:1px solid var(--ink);border-radius:2px;overflow:hidden}
 .topic-sw button{flex:1;padding:11px 12px;background:transparent;border:0;font:inherit;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-2);cursor:pointer;min-height:40px;font-weight:500;font-feature-settings:"tnum"}
@@ -83,7 +84,7 @@ body[data-lang="en"] .take::before{content:"Take"}
 @media(hover:none){.hint{display:none}}
 </style>
 </head>
-<body data-lang="zh" data-topic="design">
+<body data-lang="zh" data-topic="invest">
 
 <header>
   <div class="brow">
@@ -102,18 +103,18 @@ body[data-lang="en"] .take::before{content:"Take"}
 </header>
 
 <div class="topic-sw" id="topicsw">
-  <button class="on" data-t="design"><span class="zh">設計 · AI</span><span class="en">Design · AI</span><span class="cnt">10</span></button>
-  <button data-t="invest"><span class="zh">投資 · 總經</span><span class="en">Invest · Macro</span><span class="cnt">5</span></button>
+  <button data-t="design"><span class="zh">設計 · AI</span><span class="en">Design · AI</span><span class="cnt">10</span></button>
+  <button class="on" data-t="invest"><span class="zh">投資 · 總經</span><span class="en">Invest · Macro</span><span class="cnt">5</span></button>
 </div>
 
 <nav id="tabs">
   <!-- DESIGN TABS -->
-  <button class="tab active t-design" data-topic="design" data-i="d0"><span class="pri">◇</span><span class="zh">本日趨勢</span><span class="en">Today</span></button>
+  <button class="tab t-design" data-topic="design" data-i="d0"><span class="pri">◇</span><span class="zh">本日趨勢</span><span class="en">Today</span></button>
   <button class="tab t-design" data-topic="design" data-i="d1"><span class="pri">01</span><span class="zh">Figma Skills</span><span class="en">Figma Skills</span></button>
   <button class="tab t-design" data-topic="design" data-i="d2"><span class="pri">02</span><span class="zh">Stitch 進化</span><span class="en">Stitch Evolves</span></button>
   <button class="tab t-design" data-topic="design" data-i="d3"><span class="pri">03</span><span class="zh">AI 疲勞</span><span class="en">AI Fatigue</span></button>
   <!-- INVEST TABS -->
-  <button class="tab t-invest" data-topic="invest" data-i="i0"><span class="pri">◇</span><span class="zh">本日總經</span><span class="en">Macro Take</span></button>
+  <button class="tab active t-invest" data-topic="invest" data-i="i0"><span class="pri">◇</span><span class="zh">本日總經</span><span class="en">Macro Take</span></button>
   <button class="tab t-invest" data-topic="invest" data-i="i1"><span class="pri">01</span><span class="zh">Fed 會議</span><span class="en">Fed Meeting</span></button>
   <button class="tab t-invest" data-topic="invest" data-i="i2"><span class="pri">02</span><span class="zh">台積電 Q1</span><span class="en">TSMC Q1</span></button>
   <button class="tab t-invest" data-topic="invest" data-i="i3"><span class="pri">03</span><span class="zh">美元指數</span><span class="en">DXY</span></button>
@@ -121,7 +122,7 @@ body[data-lang="en"] .take::before{content:"Take"}
 </nav>
 
 <!-- ========== DESIGN CARDS ========== -->
-<article class="card active t-design" data-topic="design" data-i="d0">
+<article class="card t-design" data-topic="design" data-i="d0">
   <div class="meta"><span class="dot tr"></span><span class="ac zh">本日趨勢觀察</span><span class="ac en">Daily Take</span><span class="sep">/</span><span>04.20</span></div>
   <h2 class="zh">Agent 進駐設計檔，使用者開始反彈</h2>
   <h2 class="en">Agents Move Into Design Files, Users Push Back</h2>
@@ -176,7 +177,7 @@ body[data-lang="en"] .take::before{content:"Take"}
 </article>
 
 <!-- ========== INVEST CARDS ========== -->
-<article class="card t-invest" data-topic="invest" data-i="i0">
+<article class="card active t-invest" data-topic="invest" data-i="i0">
   <div class="meta"><span class="dot tr"></span><span class="ac zh">本日總經觀察</span><span class="ac en">Macro Take</span><span class="sep">/</span><span>04.20</span></div>
   <h2 class="zh">Fed 會前靜默期，科技股等待催化</h2>
   <h2 class="en">Pre-FOMC Quiet Period, Tech Awaits Catalyst</h2>
@@ -252,7 +253,7 @@ body[data-lang="en"] .take::before{content:"Take"}
 <div class="hint"><span class="zh">左右滑動切換　⌨ ← →</span><span class="en">Swipe to switch　⌨ ← →</span></div>
 
 <script>
-let cur=0,topic='design';
+let cur=0,topic='invest';
 function list(){return Array.from(document.querySelectorAll('.tab[data-topic="'+topic+'"]'))}
 function cards(){return Array.from(document.querySelectorAll('.card[data-topic="'+topic+'"]'))}
 function go(i){
@@ -291,6 +292,11 @@ document.getElementById('topicsw').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
   topic=b.dataset.t;document.body.dataset.topic=topic;
   document.querySelectorAll('#topicsw button').forEach(x=>x.classList.toggle('on',x.dataset.t===topic));
+  if(topic==='invest'&&document.body.dataset.lang==='en'){
+    document.body.dataset.lang='zh';
+    document.querySelectorAll('#langsw button').forEach(x=>x.classList.toggle('on',x.dataset.l==='zh'));
+    document.documentElement.lang='zh-TW';
+  }
   go(0);
 });
 </script>
