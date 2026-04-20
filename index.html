@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f5ef">
+<title>04.20 每日精選</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+--bg:#f7f5ef;--card:#fbfaf5;--ink:#14110d;--ink-2:#58534a;--ink-3:#9a9488;--rule:#d9d3c6;--accent:#a04a2e;
+--p1:#0a7a62;--p2:#2b4ea8;--p3:#a86a16;--p4:#6d6559;--tr:#7d3a9a;
+}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif;font-size:15px;line-height:1.75;color:var(--ink);background:var(--bg);padding:20px 18px 60px;max-width:680px;margin:0 auto;-webkit-font-smoothing:antialiased;overscroll-behavior-y:contain;font-feature-settings:"palt"}
+body[data-lang="zh"] .en{display:none}
+body[data-lang="en"] .zh{display:none}
+
+header{padding:8px 0 14px;border-bottom:1px solid var(--ink);margin-bottom:2px}
+.brow{display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-2);margin-bottom:10px}
+h1{font-size:26px;font-weight:700;letter-spacing:-0.015em;line-height:1.15}
+.sub{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-3);margin-top:6px}
+.lang-sw{display:inline-flex;gap:2px}
+.lang-sw button{padding:3px 8px;background:transparent;border:0;font:inherit;font-size:10.5px;letter-spacing:0.14em;color:var(--ink-3);cursor:pointer;text-transform:uppercase}
+.lang-sw button.on{color:var(--ink);font-weight:600;border-bottom:1.5px solid var(--ink)}
+
+nav{display:flex;overflow-x:auto;gap:6px;padding:14px 0;margin:0 -18px 28px;padding-left:18px;padding-right:18px;position:sticky;top:0;background:var(--bg);z-index:5;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-bottom:1px solid var(--rule)}
+nav::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:7px 13px;min-height:34px;border:1px solid var(--rule);border-radius:999px;background:transparent;font:inherit;font-size:12.5px;color:var(--ink-2);cursor:pointer;white-space:nowrap;touch-action:manipulation;display:inline-flex;align-items:center;gap:5px;letter-spacing:0.01em}
+.tab:active{background:var(--card)}
+.tab.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pri{font-size:10.5px;color:var(--ink-3);font-weight:500;font-feature-settings:"tnum"}
+.tab.active .pri{color:var(--rule)}
+
+.card{display:none;padding-top:4px}
+.card.active{display:block;animation:fi .18s ease}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:7px;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot.p1{background:var(--p1)}.dot.p2{background:var(--p2)}.dot.p3{background:var(--p3)}.dot.p4{background:var(--p4)}.dot.tr{background:var(--tr)}
+.sep{color:var(--ink-3);opacity:0.5}
+.ac{color:var(--ink-2);font-weight:500}
+
+h2{font-size:23px;line-height:1.35;font-weight:700;letter-spacing:-0.015em;margin-bottom:14px}
+.rule{height:1px;background:var(--ink);width:32px;margin:0 0 18px}
+.sum{font-size:15px;line-height:1.78;margin-bottom:22px;color:var(--ink)}
+
+.take{position:relative;background:var(--card);border-left:3px solid var(--accent);padding:14px 16px;margin-bottom:24px;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.take::before{display:block;font-size:10px;font-weight:600;color:var(--accent);letter-spacing:0.2em;margin-bottom:4px;text-transform:uppercase}
+body[data-lang="zh"] .take::before{content:"觀　點"}
+body[data-lang="en"] .take::before{content:"Take"}
+
+.link{display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;padding:8px 0;border-bottom:1px solid var(--ink);min-height:32px}
+.link:active{opacity:0.6}
+
+.trend{font-size:15.5px;line-height:1.8;color:var(--ink)}
+.trend p{margin-bottom:14px}
+.trend p:last-child{margin-bottom:0}
+
+.foot{display:flex;gap:8px;padding-top:28px;margin-top:28px;border-top:1px solid var(--rule)}
+.foot button{flex:1;padding:12px;background:transparent;border:1px solid var(--rule);font:inherit;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-2);cursor:pointer;min-height:44px}
+.foot button:active{background:var(--card)}
+.hint{text-align:center;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-3);padding-top:20px}
+
+@media(min-width:680px){
+  body{padding:40px 28px 80px;max-width:640px}
+  h1{font-size:30px}
+  h2{font-size:26px}
+  nav{margin:0 -28px 32px;padding-left:28px;padding-right:28px}
+}
+@media(hover:none){.hint{display:none}}
+</style>
+</head>
+<body data-lang="zh">
+
+<header>
+  <div class="brow">
+    <span>No. 002 — 2026.04.20</span>
+    <div class="lang-sw" id="langsw">
+      <button class="on" data-l="zh">中</button>
+      <button data-l="en">EN</button>
+    </div>
+  </div>
+  <h1 class="zh">每日精選</h1>
+  <h1 class="en">Daily Digest</h1>
+  <div class="sub zh">AI × UXUI · PM · Tech</div>
+  <div class="sub en">AI × UXUI · PM · Tech</div>
+</header>
+
+<nav id="tabs">
+  <button class="tab active" data-i="0"><span class="pri">◇</span><span class="zh">本日趨勢</span><span class="en">Today</span></button>
+  <button class="tab" data-i="1"><span class="pri">01</span><span class="zh">Figma Skills</span><span class="en">Figma Skills</span></button>
+  <button class="tab" data-i="2"><span class="pri">02</span><span class="zh">Stitch 進化</span><span class="en">Stitch Evolves</span></button>
+  <button class="tab" data-i="3"><span class="pri">03</span><span class="zh">AI 疲勞</span><span class="en">AI Fatigue</span></button>
+  <button class="tab" data-i="4"><span class="pri">04</span><span class="zh">Agent 是用戶</span><span class="en">Agents as Users</span></button>
+  <button class="tab" data-i="5"><span class="pri">05</span><span class="zh">ChatPRD</span><span class="en">ChatPRD</span></button>
+  <button class="tab" data-i="6"><span class="pri">06</span><span class="zh">Opus 4.7</span><span class="en">Opus 4.7</span></button>
+  <button class="tab" data-i="7"><span class="pri">07</span><span class="zh">Codex 桌面</span><span class="en">Codex Desktop</span></button>
+  <button class="tab" data-i="8"><span class="pri">08</span><span class="zh">Apple × Gemini</span><span class="en">Apple × Gemini</span></button>
+  <button class="tab" data-i="9"><span class="pri">09</span><span class="zh">Meta Muse</span><span class="en">Meta Muse</span></button>
+</nav>
+
+<article class="card active" data-i="0">
+  <div class="meta"><span class="dot tr"></span><span class="ac zh">本日趨勢觀察</span><span class="ac en">Daily Take</span><span class="sep">/</span><span>04.20</span></div>
+  <h2 class="zh">Agent 進駐設計檔，使用者開始反彈</h2>
+  <h2 class="en">Agents Move Into Design Files, Users Push Back</h2>
+  <div class="rule"></div>
+  <div class="trend zh">
+    <p>這週兩個方向撞一起：一邊 Figma 把 MCP 打開讓 AI agent 直接改檔案、Google Stitch 導入 DESIGN.md 格式，design-to-code 的管線第一次真正由 agent 接管。</p>
+    <p>另一邊 NN/g 連發兩篇提醒——使用者已經「AI 疲勞」，想看得出是人做的設計；而 agent 本身又成了介面的第二種用戶。</p>
+    <p>設計師今年的新技能會是「寫 instruction 給 agent」與「設計給 agent 看的 UI」——這兩件事，比學哪個 AI 工具更關鍵。</p>
+  </div>
+  <div class="trend en">
+    <p>Two currents collided this week: Figma opened its MCP so AI agents can modify files directly, and Google Stitch rolled out DESIGN.md — the design-to-code pipeline is now genuinely agent-driven.</p>
+    <p>Meanwhile NN/g published twice this week on the opposite signal: users are AI-fatigued and want designs that look human-made, while agents themselves have become a second type of user for interfaces.</p>
+    <p>The new skill for designers this year is writing instructions for agents and designing UIs agents can read — both matter more than picking which AI tool to learn.</p>
+  </div>
+</article>
+
+<article class="card" data-i="1">
+  <div class="meta"><span class="dot p1"></span><span class="ac">P1 · AI × UXUI</span><span class="sep">/</span><span class="zh">文章</span><span class="en">Article</span><span class="sep">/</span><span>EN</span><span class="sep">/</span><span>Figma Blog · 04</span></div>
+  <h2 class="zh">Figma 開放 MCP：AI agent 能直接寫你的設計檔</h2>
+  <h2 class="en">Figma Opens MCP: AI Agents Can Now Write to Your Files</h2>
+  <div class="rule"></div>
+  <p class="sum zh">Figma 大幅升級 AI：MCP server 讓外部 agent 直接讀寫 Figma 檔案，能用既有 component、variable、token 產出真實資產。同步推出 Skills——用 Markdown 寫的指令集，讓 agent 理解 design system 背後的意圖。Expand / Erase / Isolate / Vectorize 四個 AI 圖像工具擴展到 FigJam、Slides、Buzz。</p>
+  <p class="sum en">Figma's biggest AI push yet: MCP server lets external agents read and write Figma files, creating real assets using existing components, variables, and tokens. Paired with Skills — Markdown instruction sets that teach agents the intent behind a design system, not just its assets. The Expand / Erase / Isolate / Vectorize AI image tools now ship in FigJam, Slides, and Buzz.</p>
+  <p class="take zh">關鍵不是 AI，是 MCP——你的 design system 現在是 agent 可讀的 API。Skills 這個方向是本月最值得追的。</p>
+  <p class="take en">The news isn't AI, it's MCP — your design system is now a readable API for any agent. Skills is the most interesting direction anyone shipped this month.</p>
+  <a class="link zh" href="https://www.figma.com/release-notes/" target="_blank">閱讀原文 →</a>
+  <a class="link en" href="https://www.figma.com/release-notes/" target="_blank">Read article →</a>
+</article>
+
+<article class="card" data-i="2">
+  <div class="meta"><span class="dot p1"></span><span class="ac">P1 · AI × UXUI</span><span class="sep">/</span><span class="zh">文章</span><span class="en">Article</span><span class="sep">/</span><span>EN</span><span class="sep">/</span><span>UXPin · 04</span></div>
+  <h2 class="zh">Google Stitch 丟出 DESIGN.md，Figma 股價一天跌 4%</h2>
+  <h2 class="en">Google Stitch Drops DESIGN.md, Figma Stock Falls 4%</h2>
+  <div class="rule"></div>
+  <p class="sum zh">Google Stitch 導入 DESIGN.md——用自然語言檔案記錄介面設計，可從任何 URL 抽取並跨專案重用。新增 Gemini 2.5 Pro / Flash 雙模型選擇（品質 vs. 速度），並支援 design token 上傳。市場反應強烈：3 月 19 日 Figma 股價下跌超過 4%。</p>
+  <p class="sum en">Google Stitch introduced DESIGN.md — a natural-language file format that captures interface design details, extractable from any URL and reusable across projects. New model picker lets users choose Gemini 2.5 Pro for polished output or 2.5 Flash for fast iteration. Design system import now supports color palettes, typography scales, and component libraries. Market signal was immediate: Figma shares dropped over 4% on March 19.</p>
+  <p class="take zh">DESIGN.md 要是變成設計界的 OpenAPI，遊戲規則就變了。但 Stitch 還在穩定性問題（論壇 10K+ views 的 bug 討論），現在還是早期試用期。</p>
+  <p class="take en">If DESIGN.md becomes the OpenAPI of design, the rules of the game change. Stitch still has stability issues (10K+ views on bug threads), so treat this as an early-access bet, not a replacement.</p>
+  <a class="link zh" href="https://www.uxpin.com/studio/blog/google-stitch-ai-design-tool-updates-ui-ux/" target="_blank">閱讀原文 →</a>
+  <a class="link en" href="https://www.uxpin.com/studio/blog/google-stitch-ai-design-tool-updates-ui-ux/" target="_blank">Read article →</a>
+</article>
+
+<article class="card" data-i="3">
+  <div class="meta"><span class="dot p1"></span><span class="ac">P1 · AI × UXUI</span><span class="sep">/</span><span class="zh">文章</span><span class="en">Article</span><span class="sep">/</span><span>EN</span><span class="sep">/</span><span>NN/g · 04.10</span></div>
+  <h2 class="zh">NN/g：使用者開始想看「人做的設計」</h2>
+  <h2 class="en">NN/g: Users Want Designs That Look Human-Made</h2>
+  <div class="rule"></div>
+  <p class="sum zh">NN/g 四月初的新觀察——AI 生成內容到處都是之後，「AI 疲勞」成了主流情緒。用戶開始識別並排斥明顯 AI-made 的介面，傾向那些看得出有人在意的細節。設計師的新差異化：可感知的人工取捨。</p>
+  <p class="sum en">NN/g's early-April piece: as AI-generated everything saturates the web, "AI fatigue" has become a dominant user mood. People are learning to spot and reject obviously AI-made interfaces, gravitating instead to details that betray a human's care. Designers' new edge: perceptible human craft.</p>
+  <p class="take zh">跟 01、02 的 agent 浪潮形成鏡像：工具越自動，人味越值錢。</p>
+  <p class="take en">A mirror image to 01 and 02's agent wave: the more automated the tooling, the more a human signature is worth.</p>
+  <a class="link zh" href="https://www.nngroup.com/articles/" target="_blank">閱讀原文 →</a>
+  <a class="link en" href="https://www.nngroup.com/articles/" target="_blank">Read article →</a>
+</article>
+
+<article class="card" data-i="4">
+  <div class="meta"><span class="dot p1"></span><span class="ac">P1 · AI × UXUI</span><span class="sep">/</span><span class="zh">文章</span><span class="en">Article</span><span class="sep">/</span><span>EN</span><span class="sep">/</span><span>NN/g · 04.10</span></div>
+  <h2 class="zh">AI Agent 也是你的使用者</h2>
+  <h2 class="en">AI Agents Are Now a Second User</h2>
+  <div class="rule"></div>
+  <p class="sum zh">NN/g 指出介面現在同時服務兩種使用者——人類與 AI agent。設計時要同時思考兩者的資訊架構與無障礙：agent 看得懂 DOM 語意、有正確的 ARIA role、能被程式化操作，才能真正參與工作流。「user」的定義要重新想。</p>
+  <p class="sum en">NN/g argues interfaces now serve two user types — humans and AI agents. Designers must think about information architecture and accessibility for both: agents need clear DOM semantics, correct ARIA roles, and programmatic affordances to actually participate in workflows. The very definition of "user" needs a rethink.</p>
+  <p class="take zh">Accessibility 以前是 nice-to-have，現在是 agent-readable 的前提。這篇可以當下個 design review 的 checklist 起點。</p>
+  <p class="take en">Accessibility used to be nice-to-have; now it's the precondition for agent-readability. Treat this as the starting checklist for your next design review.</p>
+  <a class="link zh" href="https://www.nngroup.com/articles/" target="_blank">閱讀原文 →</a>
+  <a class="link en" href="https://www.nngroup.com/articles/" target="_blank">Read article →</a>
+</article>
+
+<article class="card" data-i="5">
+  <div class="meta"><span class="dot p2"></span><span class="ac">P2 · 工具</span><span class="sep">/</span><span class="zh">Podcast</span><span class="en">Podcast</span><span class="sep">/</span><span>EN</span><span class="sep">/</span><span>Lenny's · 04</span></div>
+  <h2 class="zh">Lenny 這集：讓 PM 工作重新好玩起來的 AI agent</h2>
+  <h2 class="en">Lenny's: Making PM Work Fun Again With AI Agents</h2>
+  <div class="rule"></div>
+  <p class="sum zh">Lenny's Newsletter 本月主題曲——「Make product management fun again with AI agents」。重點在新的 PM 工具組合：ChatPRD（寫 PRD、做決策）、Product Pass Bundle（28 個工具、$30K+ 價值）都打包給年度訂戶，核心論點是「AI agent 讓 PM 可以只做有趣的部分」。</p>
+  <p class="sum en">Lenny's Newsletter's headline April piece: "Make product management fun again with AI agents." The core bundle — ChatPRD for PRDs and decisions, plus a Product Pass of 28 tools worth $30K+, bundled for annual subscribers — points at a bigger thesis: AI agents let PMs keep only the fun part of the job.</p>
+  <p class="take zh">對 PM 同事與設計 × PM 合作點都有 signal：PRD 自動化後，設計師會更常面對「AI 生出的 PRD」作為起點。</p>
+  <p class="take en">Useful signal for PMs and for design-PM collaboration: once PRDs are AI-drafted, designers will increasingly start from an AI-written PRD rather than a human one.</p>
+  <a class="link zh" href="https://www.lennysnewsletter.com/p/make-product-management-fun-again-9f6" target="_blank">收聽 →</a>
+  <a class="link en" href="https://www.lennysnewsletter.com/p/make-product-management-fun-again-9f6" target="_blank">Listen →</a>
+</article>
+
+<article class="card" data-i="6">
+  <div class="meta"><span class="dot p3"></span><span class="ac">P3 · 巨頭</span><span class="sep">/</span><span class="zh">文章</span><span class="en">Article</span><span class="sep">/</span><span>EN</span><span class="sep">/</span><span>Neowin · 04</span></div>
+  <h2 class="zh">Claude Opus 4.7 登場，agentic coding 重回第一</h2>
+  <h2 class="en">Claude Opus 4.7 Ships, Retakes Top Coding Spot</h2>
+  <div class="rule"></div>
+  <p class="sum zh">Anthropic 發表 Claude Opus 4.7，在 agentic coding benchmark 上擊敗 OpenAI GPT-5.4，回到榜首。同步推出 Claude Code 的 /ultrareview slash command——專門開一個 review session 掃 bug 與 design issue。另有內部測試中的 Claude Mythos，被形容為 step change。</p>
+  <p class="sum en">Anthropic launched Claude Opus 4.7, retaking the top spot on agentic coding benchmarks over OpenAI's GPT-5.4. Shipped alongside is /ultrareview, a new slash command in Claude Code that spins up a dedicated review session for bug and design-issue detection. A still-internal model called Claude Mythos is being described as a step change.</p>
+  <p class="take zh">設計檔 review 這條線值得注意：LLM 開始具備「讀別人工作並挑毛病」的能力，設計工具很快會接上。</p>
+  <p class="take en">Watch the review-workflow angle: LLMs are getting better at "reading someone else's work and flagging issues" — design tools will pick this up next.</p>
+  <a class="link zh" href="https://www.neowin.net/news/anthropic-announces-claude-opus-47-beating-openai-gpt-54-in-agentic-coding-benchmarks/" target="_blank">閱讀原文 →</a>
+  <a class="link en" href="https://www.neowin.net/news/anthropic-announces-claude-opus-47-beating-openai-gpt-54-in-agentic-coding-benchmarks/" target="_blank">Read article →</a>
+</article>
+
+<article class="card" data-i="7">
+  <div class="meta"><span class="dot p3"></span><span class="ac">P3 · 巨頭</span><span class="sep">/</span><span class="zh">文章</span><span class="en">Article</span><span class="sep">/</span><span>EN</span><span class="sep">/</span><span>TechCrunch · 04.16</span></div>
+  <h2 class="zh">OpenAI Codex 大改版，直接操控你的桌面</h2>
+  <h2 class="en">OpenAI's Revamped Codex Takes Over Your Desktop</h2>
+  <div class="rule"></div>
+  <p class="sum zh">OpenAI 發表新版 Codex：可在背景開任何桌面應用，由游標操作、自動打字，並新增 memory 功能記憶你的工作風格與上下文。明確對標 Anthropic Claude Code，兩家在 AI coding 工具的戰線全面展開。</p>
+  <p class="sum en">OpenAI's revamped Codex can now operate silently on your desktop — opening any app, driving the cursor, and typing automatically. A new preview "memory" feature recalls prior sessions and builds context about how you work. The pitch is explicitly aimed at Anthropic's Claude Code, opening a second front in the AI-coding war.</p>
+  <p class="take zh">桌面操控 + 記憶，是未來半年設計工具的常態，但對隱私與權限設計的挑戰也是本年度最大的。</p>
+  <p class="take en">Desktop control plus persistent memory will be baseline in design tools within six months — and the privacy and permissions design challenge of the year.</p>
+  <a class="link zh" href="https://techcrunch.com/2026/04/16/openai-takes-aim-at-anthropic-with-beefed-up-codex-that-gives-it-more-power-over-your-desktop/" target="_blank">閱讀原文 →</a>
+  <a class="link en" href="https://techcrunch.com/2026/04/16/openai-takes-aim-at-anthropic-with-beefed-up-codex-that-gives-it-more-power-over-your-desktop/" target="_blank">Read article →</a>
+</article>
+
+<article class="card" data-i="8">
+  <div class="meta"><span class="dot p3"></span><span class="ac">P3 · 巨頭</span><span class="sep">/</span><span class="zh">文章</span><span class="en">Article</span><span class="sep">/</span><span>EN</span><span class="sep">/</span><span>MacRumors · 04.16</span></div>
+  <h2 class="zh">Apple 全新品類年底登場，Siri 背後是 Google Gemini</h2>
+  <h2 class="en">Apple's New Product Category Arrives Late 2026, Powered by Google Gemini</h2>
+  <div class="rule"></div>
+  <p class="sum zh">Apple 確認年底到明年初推出首款智慧眼鏡，內建相機、喇叭、麥克風，由 Siri 播報通知。背後 AI 是 Google Gemini，跑在 Apple 自己的 Private Cloud Compute 上——史上第一次 Apple 大規模外包核心模型。</p>
+  <p class="sum en">Apple confirmed it will launch its first smart glasses late 2026 / early 2027, with built-in cameras, speakers, and mics, and Siri reading notifications. The AI behind Siri: Google Gemini, running on Apple's own Private Cloud Compute — the first time Apple has outsourced its core model at this scale.</p>
+  <p class="take zh">Apple 放棄自建 frontier model 是業界大新聞。穿戴式裝置的 UX 這波會是設計師熱區。</p>
+  <p class="take en">Apple stepping back from building its own frontier model is a big industry signal. Wearable UX will be a hot design space through 2027.</p>
+  <a class="link zh" href="https://www.macrumors.com/2026/04/16/all-new-apple-product-later-this-year/" target="_blank">閱讀原文 →</a>
+  <a class="link en" href="https://www.macrumors.com/2026/04/16/all-new-apple-product-later-this-year/" target="_blank">Read article →</a>
+</article>
+
+<article class="card" data-i="9">
+  <div class="meta"><span class="dot p3"></span><span class="ac">P3 · 巨頭</span><span class="sep">/</span><span class="zh">文章</span><span class="en">Article</span><span class="sep">/</span><span>EN</span><span class="sep">/</span><span>Mean.ceo · 04</span></div>
+  <h2 class="zh">Meta 推旗艦模型 Muse Spark，今年 capex 1.35 千億美元</h2>
+  <h2 class="en">Meta Unveils Muse Spark Flagship, $135B Capex in 2026</h2>
+  <div class="rule"></div>
+  <p class="sum zh">Meta 新 AI 部門 Superintelligence Labs（Alexandr Wang 主持）推出 Muse Spark，多模態感知、推理、agent 任務上打平 OpenAI / Google，運算成本只有上代 Llama 4 中型版的幾分之一。2026 年 AI 資本支出拉到 $115–135B，幾乎是去年兩倍。</p>
+  <p class="sum en">Meta's new Superintelligence Labs (led by CAI Alexandr Wang) unveiled Muse Spark, its first flagship model — competitive with OpenAI and Google on multimodal perception, reasoning, health, and agentic tasks at a fraction of the compute cost of Llama 4 mid. 2026 AI capex is set at $115–135B, nearly double last year.</p>
+  <p class="take zh">三強正式變四強。產品設計師要留意 Meta 系產品（IG、WhatsApp、Threads）接下來 6 個月 AI 功能密度會暴增。</p>
+  <p class="take en">It's officially a four-horse race. Expect Meta surfaces — IG, WhatsApp, Threads — to get a dense AI-feature rollout over the next six months.</p>
+  <a class="link zh" href="https://blog.mean.ceo/new-ai-model-releases-news-april-2026/" target="_blank">閱讀原文 →</a>
+  <a class="link en" href="https://blog.mean.ceo/new-ai-model-releases-news-april-2026/" target="_blank">Read article →</a>
+</article>
+
+<div class="foot">
+  <button id="prev"><span class="zh">← 上一篇</span><span class="en">← Prev</span></button>
+  <button id="next"><span class="zh">下一篇 →</span><span class="en">Next →</span></button>
+</div>
+<div class="hint"><span class="zh">左右滑動切換　⌨ ← →</span><span class="en">Swipe to switch　⌨ ← →</span></div>
+
+<script>
+const tabs=document.querySelectorAll('.tab'),cards=document.querySelectorAll('.card');
+let cur=0;const total=cards.length;
+function go(i){
+  if(i<0)i=total-1;if(i>=total)i=0;cur=i;
+  tabs.forEach(t=>t.classList.toggle('active',+t.dataset.i===i));
+  cards.forEach(c=>c.classList.toggle('active',+c.dataset.i===i));
+  document.querySelector('.tab.active')?.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+  window.scrollTo({top:0,behavior:'instant'});
+}
+tabs.forEach(t=>t.addEventListener('click',()=>go(+t.dataset.i)));
+document.getElementById('prev').addEventListener('click',()=>go(cur-1));
+document.getElementById('next').addEventListener('click',()=>go(cur+1));
+document.addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+  if(e.key==='ArrowRight'||e.key==='j')go(cur+1);
+  else if(e.key==='ArrowLeft'||e.key==='k')go(cur-1);
+  else if(/^[1-9]$/.test(e.key)){const i=+e.key-1;if(i<total)go(i)}
+});
+let tx=0,ty=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
+  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){dx<0?go(cur+1):go(cur-1)}
+},{passive:true});
+document.getElementById('langsw').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  const l=b.dataset.l;document.body.dataset.lang=l;
+  document.querySelectorAll('#langsw button').forEach(x=>x.classList.toggle('on',x.dataset.l===l));
+  document.documentElement.lang=l==='zh'?'zh-TW':'en';
+});
+</script>
+</body>
+</html>
