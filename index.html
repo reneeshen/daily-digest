@@ -108,8 +108,8 @@ body[data-lang="en"] .take::before{content:"Take"}
 </header>
 
 <div class="topic-sw" id="topicsw">
-  <button data-t="design"><span class="zh">設計 · AI</span><span class="en">Design · AI</span><span class="cnt" data-cnt="design">0</span></button>
   <button class="on" data-t="invest"><span class="zh">投資 · 總經</span><span class="cnt" data-cnt="invest">0</span></button>
+  <button data-t="design"><span class="zh">設計 · AI</span><span class="en">Design · AI</span><span class="cnt" data-cnt="design">0</span></button>
 </div>
 
 <nav id="tabs"></nav>
@@ -179,9 +179,9 @@ function render(data){
     return `<button class="tab t-${topic}" data-topic="${topic}" data-i="${topic[0]}${idx}">${content}</button>`;
   }
 
-  // Build tabs + cards for design then invest (DOM order)
+  // Build tabs + cards for invest then design (DOM order matches topic switcher)
   let tabsHtml='',cardsHtml='';
-  ['design','invest'].forEach(topic=>{
+  ['invest','design'].forEach(topic=>{
     const t=data[topic];
     tabsHtml+=renderTab(topic,null,0);
     cardsHtml+=renderTake(topic);
