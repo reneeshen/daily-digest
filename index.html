@@ -125,6 +125,7 @@ body[data-lang="en"] .take::before{content:"Take"}
 <script>
 const P_CLASS={P1:'p1',P2:'p2',P3:'p3',P4:'p4'};
 const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl=u=>{try{const p=new URL(String(u||''));return(p.protocol==='http:'||p.protocol==='https:')?p.href:'#'}catch{return'#'}};
 const paragraphs=t=>String(t||'').split(/\n\s*\n/).map(p=>`<p>${esc(p.trim())}</p>`).join('');
 
 function render(data){
@@ -162,7 +163,7 @@ function render(data){
     const h2=isZhOnly?`<h2>${esc(a.title_zh)}</h2>`:`<h2 class="zh">${esc(a.title_zh)}</h2><h2 class="en">${esc(a.title_en||a.title_zh)}</h2>`;
     const sum=isZhOnly?`<p class="sum">${esc(a.summary_zh)}</p>`:`<p class="sum zh">${esc(a.summary_zh)}</p><p class="sum en">${esc(a.summary_en||'')}</p>`;
     const take=isZhOnly?`<p class="take">${esc(a.take_zh)}</p>`:`<p class="take zh">${esc(a.take_zh)}</p><p class="take en">${esc(a.take_en||'')}</p>`;
-    const link=isZhOnly?`<a class="link" href="${esc(a.url)}" target="_blank" rel="noopener">閱讀原文 →</a>`:`<a class="link zh" href="${esc(a.url)}" target="_blank" rel="noopener">閱讀原文 →</a><a class="link en" href="${esc(a.url)}" target="_blank" rel="noopener">Read article →</a>`;
+    const link=isZhOnly?`<a class="link" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">閱讀原文 →</a>`:`<a class="link zh" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">閱讀原文 →</a><a class="link en" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">Read article →</a>`;
     return `<article class="card t-${topic}" data-topic="${topic}" data-i="${topic[0]}${idx}">
       <div class="meta">${meta}</div>${h2}<div class="rule"></div>${sum}${take}${link}
     </article>`;
