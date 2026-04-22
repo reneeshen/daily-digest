@@ -139,19 +139,19 @@ const paragraphs=t=>String(t||'').split(/\n\s*\n/).map(p=>`<p>${esc(p.trim())}</
 
 let DATA=null;
 function fmtShare(topic,a){
-  const isZhOnly=topic==='invest';
+  // invest 類一律只有中文；design 類跟隨當下顯示語言
+  const lang=(topic==='invest')?'zh':(document.body.dataset.lang||'zh');
   const L=[];
-  if(isZhOnly){
+  if(lang==='en'){
+    L.push(a.title_en||a.title_zh||'');
+    L.push(`${a.priority||''} · ${a.category_en||a.category_zh||''} · ${a.source||''} · ${a.date||''}`);
+    L.push('','【Summary】',a.summary_en||a.summary_zh||'');
+    L.push('','【Take】',a.take_en||a.take_zh||'');
+  }else{
     L.push(a.title_zh||'');
     L.push(`${a.priority||''} · ${a.category_zh||''} · ${a.source||''} · ${a.date||''}`);
-    L.push('','【摘要】',a.summary_zh||'','','【觀點】',a.take_zh||'');
-  }else{
-    L.push(a.title_en?`${a.title_zh} / ${a.title_en}`:(a.title_zh||''));
-    L.push(`${a.priority||''} · ${a.category_zh||''} · ${a.source||''} · ${a.date||''}`);
     L.push('','【摘要】',a.summary_zh||'');
-    if(a.summary_en)L.push('','【Summary】',a.summary_en);
     L.push('','【觀點】',a.take_zh||'');
-    if(a.take_en)L.push('','【Take】',a.take_en);
   }
   return L.join('\n');
 }
