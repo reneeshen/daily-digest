@@ -140,19 +140,28 @@ const paragraphs=t=>String(t||'').split(/\n\s*\n/).map(p=>`<p>${esc(p.trim())}</
 let DATA=null;
 function fmtShare(topic,a){
   const isZhOnly=topic==='invest';
+  const url=safeUrl(a.url);
   const L=[];
-  if(isZhOnly){
-    L.push(a.title_zh||'');
-    L.push(`${a.priority||''} · ${a.category_zh||''} · ${a.source||''} · ${a.date||''}`);
-    L.push('','【摘要】',a.summary_zh||'','','【觀點】',a.take_zh||'');
-  }else{
-    L.push(a.title_en?`${a.title_zh} / ${a.title_en}`:(a.title_zh||''));
-    L.push(`${a.priority||''} · ${a.category_zh||''} · ${a.source||''} · ${a.date||''}`);
-    L.push('','【摘要】',a.summary_zh||'');
-    if(a.summary_en)L.push('','【Summary】',a.summary_en);
-    L.push('','【觀點】',a.take_zh||'');
-    if(a.take_en)L.push('','【Take】',a.take_en);
-  }
+  // Meta row (matches HTML .meta line)
+  const meta=[a.priority,a.category_zh,a.type_zh||a.type,a.source,a.date].filter(Boolean).join(' · ');
+  if(meta)L.push(meta);
+  L.push('');
+  // Title: H1 for ZH, H3 for EN subtitle (matches HTML h2.zh + h2.en)
+  L.push(`# ${a.title_zh||''}`);
+  if(!isZhOnly&&a.title_en)L.push(`### ${a.title_en}`);
+  L.push('');
+  L.push('---');
+  L.push('');
+  // Summary (matches HTML .sum paragraphs)
+  if(a.summary_zh)L.push(a.summary_zh);
+  if(!isZhOnly&&a.summary_en){L.push('');L.push(a.summary_en)}
+  L.push('');
+  // Take (matches HTML .take quoted block)
+  if(a.take_zh){L.push('> 觀點');L.push(`> ${a.take_zh}`)}
+  if(!isZhOnly&&a.take_en){L.push('');L.push('> Take');L.push(`> ${a.take_en}`)}
+  L.push('');
+  // Link inline (prevents Notion auto-bookmark preview)
+  if(url&&url!=='#')L.push(`→ 閱讀原文　${url}`);
   return L.join('\n');
 }
 function toast(msg){
@@ -165,13 +174,14 @@ function toast(msg){
 async function shareArticle(topic,idx){
   const a=DATA&&DATA[topic]&&DATA[topic].articles&&DATA[topic].articles[idx-1];
   if(!a)return;
-  const url=safeUrl(a.url);
-  const payload={title:a.title_zh||'Daily Digest',text:fmtShare(topic,a),url:url==='#'?location.href:url};
+  // Intentionally omit `url` field: Notion expands it into a bookmark block
+  // with cover image. URL is embedded inline in text instead.
+  const payload={title:a.title_zh||'Daily Digest',text:fmtShare(topic,a)};
   if(navigator.share){
     try{await navigator.share(payload)}catch(e){/* user cancelled */}
   }else{
     try{
-      await navigator.clipboard.writeText(payload.text+'\n\n'+payload.url);
+      await navigator.clipboard.writeText(payload.text);
       toast('此瀏覽器不支援分享，已複製到剪貼簿');
     }catch(e){toast('分享失敗')}
   }
