@@ -67,6 +67,12 @@ body[data-lang="en"] .take::before{content:"Take"}
 .link:active{opacity:0.6}
 .urlhost{display:block;margin-top:8px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--ink-3);letter-spacing:0.02em;text-transform:none;word-break:break-all}
 .urlhost.bad{color:var(--accent)}
+.share{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:8px 14px;background:transparent;border:1px solid var(--rule);border-radius:999px;font:inherit;font-size:12px;letter-spacing:0.04em;color:var(--ink-2);cursor:pointer;min-height:36px;touch-action:manipulation}
+.share:active{background:var(--card)}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:4px;font-size:13px;letter-spacing:0.02em;z-index:100;pointer-events:none;max-width:80vw;text-align:center;animation:toastIn .2s ease}
+.toast.out{animation:toastOut .3s ease forwards}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes toastOut{to{opacity:0;transform:translate(-50%,-6px)}}
 
 .trend{font-size:15.5px;line-height:1.8;color:var(--ink)}
 .trend p{margin-bottom:14px}
@@ -131,7 +137,48 @@ const safeUrl=u=>{try{const p=new URL(String(u||''));return(p.protocol==='http:'
 const urlHost=u=>{try{const p=new URL(String(u||''));return(p.protocol==='http:'||p.protocol==='https:')?p.hostname.replace(/^www\./,''):'⚠ invalid url'}catch{return'⚠ invalid url'}};
 const paragraphs=t=>String(t||'').split(/\n\s*\n/).map(p=>`<p>${esc(p.trim())}</p>`).join('');
 
+let DATA=null;
+function fmtShare(topic,a){
+  const isZhOnly=topic==='invest';
+  const L=[];
+  if(isZhOnly){
+    L.push(a.title_zh||'');
+    L.push(`${a.priority||''} · ${a.category_zh||''} · ${a.source||''} · ${a.date||''}`);
+    L.push('','【摘要】',a.summary_zh||'','','【觀點】',a.take_zh||'');
+  }else{
+    L.push(a.title_en?`${a.title_zh} / ${a.title_en}`:(a.title_zh||''));
+    L.push(`${a.priority||''} · ${a.category_zh||''} · ${a.source||''} · ${a.date||''}`);
+    L.push('','【摘要】',a.summary_zh||'');
+    if(a.summary_en)L.push('','【Summary】',a.summary_en);
+    L.push('','【觀點】',a.take_zh||'');
+    if(a.take_en)L.push('','【Take】',a.take_en);
+  }
+  return L.join('\n');
+}
+function toast(msg){
+  const t=document.createElement('div');
+  t.className='toast';t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.classList.add('out'),1500);
+  setTimeout(()=>{if(t.parentNode)t.remove()},1900);
+}
+async function shareArticle(topic,idx){
+  const a=DATA&&DATA[topic]&&DATA[topic].articles&&DATA[topic].articles[idx-1];
+  if(!a)return;
+  const url=safeUrl(a.url);
+  const payload={title:a.title_zh||'Daily Digest',text:fmtShare(topic,a),url:url==='#'?location.href:url};
+  if(navigator.share){
+    try{await navigator.share(payload)}catch(e){/* user cancelled */}
+  }else{
+    try{
+      await navigator.clipboard.writeText(payload.text+'\n\n'+payload.url);
+      toast('此瀏覽器不支援分享，已複製到剪貼簿');
+    }catch(e){toast('分享失敗')}
+  }
+}
+
 function render(data){
+  DATA=data;
   const root=document.getElementById('root');
   const shell=document.getElementById('shell').content.cloneNode(true);
   root.innerHTML='';root.appendChild(shell);
@@ -169,8 +216,9 @@ function render(data){
     const host=urlHost(a.url);
     const hostCls=host==='⚠ invalid url'?'urlhost bad':'urlhost';
     const link=isZhOnly?`<a class="link" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">閱讀原文 →</a><span class="${hostCls}">${esc(host)}</span>`:`<a class="link zh" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">閱讀原文 →</a><a class="link en" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">Read article →</a><span class="${hostCls}">${esc(host)}</span>`;
+    const share=`<div><button class="share" data-t="${topic}" data-idx="${idx}"><span class="zh">📤 分享（含摘要 & 觀點）</span><span class="en">📤 Share with summary & take</span></button></div>`;
     return `<article class="card t-${topic}" data-topic="${topic}" data-i="${topic[0]}${idx}">
-      <div class="meta">${meta}</div>${h2}<div class="rule"></div>${sum}${take}${link}
+      <div class="meta">${meta}</div>${h2}<div class="rule"></div>${sum}${take}${link}${share}
     </article>`;
   }
 
@@ -246,6 +294,12 @@ function wire(){
     const l=b.dataset.l;document.body.dataset.lang=l;
     document.querySelectorAll('#langsw button').forEach(x=>x.classList.toggle('on',x.dataset.l===l));
     document.documentElement.lang=l==='zh'?'zh-TW':'en';
+  });
+  document.getElementById('cards').addEventListener('click',e=>{
+    const b=e.target.closest('.share');
+    if(!b)return;
+    e.preventDefault();
+    shareArticle(b.dataset.t,+b.dataset.idx);
   });
   document.getElementById('topicsw').addEventListener('click',e=>{
     const b=e.target.closest('button');if(!b)return;
