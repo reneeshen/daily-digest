@@ -216,7 +216,7 @@ function render(data){
     const host=urlHost(a.url);
     const hostCls=host==='⚠ invalid url'?'urlhost bad':'urlhost';
     const link=isZhOnly?`<a class="link" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">閱讀原文 →</a><span class="${hostCls}">${esc(host)}</span>`:`<a class="link zh" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">閱讀原文 →</a><a class="link en" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">Read article →</a><span class="${hostCls}">${esc(host)}</span>`;
-    const share=`<div><button class="share" data-t="${topic}" data-idx="${idx}"><span class="zh">📤 分享（含摘要 & 觀點）</span><span class="en">📤 Share with summary & take</span></button></div>`;
+    const share=`<div><button class="share" data-t="${topic}" data-idx="${idx}"><span class="zh">分享（含摘要 & 觀點）</span><span class="en">Share with summary & take</span></button></div>`;
     return `<article class="card t-${topic}" data-topic="${topic}" data-i="${topic[0]}${idx}">
       <div class="meta">${meta}</div>${h2}<div class="rule"></div>${sum}${take}${link}${share}
     </article>`;
