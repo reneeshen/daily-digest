@@ -193,7 +193,8 @@ function render(data){
     const ac=isZhOnly?`<span class="ac">本日總經觀察</span>`:`<span class="ac zh">本日趨勢觀察</span><span class="ac en">Daily Take</span>`;
     const disclaimer=isZhOnly?`<div class="disclaimer">※ 僅為事件解讀與趨勢脈絡，不構成投資建議</div>`:'';
     const h2=isZhOnly?`<h2>${esc(t.title_zh)}</h2>`:`<h2 class="zh">${esc(t.title_zh)}</h2><h2 class="en">${esc(t.title_en||'')}</h2>`;
-    const body=isZhOnly?`<div class="trend">${paragraphs(t.body_zh)}</div>`:`<div class="trend zh">${paragraphs(t.body_zh)}</div><div class="trend en">${paragraphs(t.body_en||'')}</div>`;
+    // 自 No. 007 起：design 的 body 也只生中文，無 .zh/.en class，永遠顯示
+    const body=`<div class="trend">${paragraphs(t.body_zh)}</div>`;
     return `<article class="card t-${topic}" data-topic="${topic}" data-i="${topic[0]}0">
       <div class="meta"><span class="dot tr"></span>${ac}<span class="sep">/</span><span>${esc(data.date.slice(5))}</span></div>
       ${h2}<div class="rule"></div>${disclaimer}${body}
@@ -211,8 +212,9 @@ function render(data){
       ? `<span class="dot ${cls}"></span><span class="ac">${esc(a.priority)} · ${esc(catZh)}</span><span class="sep">/</span><span>${esc(typeZh)}</span><span class="sep">/</span><span>${esc(a.lang||'ZH')}</span><span class="sep">/</span><span>${esc(a.source)} · ${esc(a.date)}</span>`
       : `<span class="dot ${cls}"></span><span class="ac">${esc(a.priority)} · <span class="zh">${esc(catZh)}</span><span class="en">${esc(catEn)}</span></span><span class="sep">/</span><span class="zh">${esc(typeZh)}</span><span class="en">${esc(typeEn)}</span><span class="sep">/</span><span>${esc(a.lang||'EN')}</span><span class="sep">/</span><span>${esc(a.source)} · ${esc(a.date)}</span>`;
     const h2=isZhOnly?`<h2>${esc(a.title_zh)}</h2>`:`<h2 class="zh">${esc(a.title_zh)}</h2><h2 class="en">${esc(a.title_en||a.title_zh)}</h2>`;
-    const sum=isZhOnly?`<p class="sum">${esc(a.summary_zh)}</p>`:`<p class="sum zh">${esc(a.summary_zh)}</p><p class="sum en">${esc(a.summary_en||'')}</p>`;
-    const take=isZhOnly?`<p class="take">${esc(a.take_zh)}</p>`:`<p class="take zh">${esc(a.take_zh)}</p><p class="take en">${esc(a.take_en||'')}</p>`;
+    // 自 No. 007 起：summary / take 都只生中文，永遠顯示（語言切換只影響短標籤）
+    const sum=`<p class="sum">${esc(a.summary_zh)}</p>`;
+    const take=`<p class="take">${esc(a.take_zh)}</p>`;
     const host=urlHost(a.url);
     const hostCls=host==='⚠ invalid url'?'urlhost bad':'urlhost';
     const link=isZhOnly?`<a class="link" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">閱讀原文 →</a><span class="${hostCls}">${esc(host)}</span>`:`<a class="link zh" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">閱讀原文 →</a><a class="link en" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">Read article →</a><span class="${hostCls}">${esc(host)}</span>`;
