@@ -15,10 +15,6 @@ html{font-size:16px}
 body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif;font-size:15px;line-height:1.75;color:var(--ink);background:var(--bg);padding:20px 18px 60px;max-width:680px;margin:0 auto;-webkit-font-smoothing:antialiased;overscroll-behavior-y:contain;font-feature-settings:"palt"}
 body[data-lang="zh"] .en{display:none}
 body[data-lang="en"] .zh{display:none}
-body[data-topic="design"] .t-invest{display:none}
-body[data-topic="invest"] .t-design{display:none}
-body[data-topic="design"] .sub-invest{display:none}
-body[data-topic="invest"] .sub-design{display:none}
 
 header{padding:8px 0 14px;border-bottom:1px solid var(--ink);margin-bottom:2px}
 .brow{display:flex;justify-content:space-between;align-items:center;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-2);margin-bottom:10px}
@@ -27,15 +23,8 @@ h1{font-size:26px;font-weight:700;letter-spacing:-0.015em;line-height:1.15}
 .lang-sw{display:inline-flex;gap:2px}
 .lang-sw button{padding:3px 8px;background:transparent;border:0;font:inherit;font-size:10.5px;letter-spacing:0.14em;color:var(--ink-3);cursor:pointer;text-transform:uppercase}
 .lang-sw button.on{color:var(--ink);font-weight:600;border-bottom:1.5px solid var(--ink)}
-body[data-topic="invest"] .lang-sw button[data-l="en"]{opacity:0.28;pointer-events:none;cursor:not-allowed}
 
-.topic-sw{display:flex;margin:16px 0 10px;border:1px solid var(--ink);border-radius:2px;overflow:hidden}
-.topic-sw button{flex:1;padding:11px 12px;background:transparent;border:0;font:inherit;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-2);cursor:pointer;min-height:40px;font-weight:500;font-feature-settings:"tnum"}
-.topic-sw button+button{border-left:1px solid var(--ink)}
-.topic-sw button.on{background:var(--ink);color:var(--bg);font-weight:600}
-.topic-sw .cnt{margin-left:5px;font-size:10px;letter-spacing:0.1em;opacity:0.6}
-
-nav{display:flex;overflow-x:auto;gap:6px;padding:14px 0;margin:0 -18px 28px;padding-left:18px;padding-right:18px;position:sticky;top:0;background:var(--bg);z-index:5;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-bottom:1px solid var(--rule)}
+nav{display:flex;overflow-x:auto;gap:6px;padding:14px 0;margin:18px -18px 28px;padding-left:18px;padding-right:18px;position:sticky;top:0;background:var(--bg);z-index:5;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-bottom:1px solid var(--rule)}
 nav::-webkit-scrollbar{display:none}
 .tab{flex-shrink:0;padding:7px 13px;min-height:34px;border:1px solid var(--rule);border-radius:999px;background:transparent;font:inherit;font-size:12.5px;color:var(--ink-2);cursor:pointer;white-space:nowrap;touch-action:manipulation;display:inline-flex;align-items:center;gap:5px;letter-spacing:0.01em}
 .tab:active{background:var(--card)}
@@ -61,7 +50,6 @@ h2{font-size:23px;line-height:1.35;font-weight:700;letter-spacing:-0.015em;margi
 .take::before{display:block;font-size:10px;font-weight:600;color:var(--accent);letter-spacing:0.2em;margin-bottom:4px;text-transform:uppercase}
 body[data-lang="zh"] .take::before{content:"觀　點"}
 body[data-lang="en"] .take::before{content:"Take"}
-.disclaimer{font-size:10.5px;letter-spacing:0.1em;color:var(--ink-3);padding:10px 0;margin-bottom:16px;border-top:1px dotted var(--rule);border-bottom:1px dotted var(--rule);text-transform:uppercase}
 
 .link{display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;padding:8px 0;border-bottom:1px solid var(--ink);min-height:32px}
 .link:active{opacity:0.6}
@@ -90,12 +78,12 @@ body[data-lang="en"] .take::before{content:"Take"}
   body{padding:40px 28px 80px;max-width:640px}
   h1{font-size:30px}
   h2{font-size:26px}
-  nav{margin:0 -28px 32px;padding-left:28px;padding-right:28px}
+  nav{margin:18px -28px 32px;padding-left:28px;padding-right:28px}
 }
 @media(hover:none){.hint{display:none}}
 </style>
 </head>
-<body data-lang="zh" data-topic="invest">
+<body data-lang="zh">
 
 <div id="root"><div class="loading">載入中 · Loading…</div></div>
 
@@ -110,15 +98,9 @@ body[data-lang="en"] .take::before{content:"Take"}
   </div>
   <h1 class="zh">每日精選</h1>
   <h1 class="en">Daily Digest</h1>
-  <div class="sub sub-design zh">AI × UXUI · PM · Tech</div>
-  <div class="sub sub-design en">AI × UXUI · PM · Tech</div>
-  <div class="sub sub-invest zh">投資 · 總經 · 科技股</div>
+  <div class="sub zh">AI · UXUI · 產品 · 科技</div>
+  <div class="sub en">AI · UXUI · Product · Tech</div>
 </header>
-
-<div class="topic-sw" id="topicsw">
-  <button class="on" data-t="invest"><span class="zh">投資 · 總經</span><span class="cnt" data-cnt="invest">0</span></button>
-  <button data-t="design"><span class="zh">設計 · AI</span><span class="en">Design · AI</span><span class="cnt" data-cnt="design">0</span></button>
-</div>
 
 <nav id="tabs"></nav>
 <main id="cards"></main>
@@ -138,9 +120,9 @@ const urlHost=u=>{try{const p=new URL(String(u||''));return(p.protocol==='http:'
 const paragraphs=t=>String(t||'').split(/\n\s*\n/).map(p=>`<p>${esc(p.trim())}</p>`).join('');
 
 let DATA=null;
-function fmtShare(topic,a){
-  // invest 類一律只有中文；design 類跟隨當下顯示語言
-  const lang=(topic==='invest')?'zh':(document.body.dataset.lang||'zh');
+function fmtShare(a){
+  // 跟隨當下顯示語言；EN 模式下若英文長文缺漏則 fallback 中文
+  const lang=document.body.dataset.lang||'zh';
   const L=[];
   if(lang==='en'){
     L.push(a.title_en||a.title_zh||'');
@@ -148,10 +130,10 @@ function fmtShare(topic,a){
     L.push('','【Summary】',a.summary_en||a.summary_zh||'');
     L.push('','【Take】',a.take_en||a.take_zh||'');
   }else{
-    L.push(a.title_zh||'');
-    L.push(`${a.priority||''} · ${a.category_zh||''} · ${a.source||''} · ${a.date||''}`);
-    L.push('','【摘要】',a.summary_zh||'');
-    L.push('','【觀點】',a.take_zh||'');
+    L.push(a.title_zh||a.title_en||'');
+    L.push(`${a.priority||''} · ${a.category_zh||a.category_en||''} · ${a.source||''} · ${a.date||''}`);
+    L.push('','【摘要】',a.summary_zh||a.summary_en||'');
+    L.push('','【觀點】',a.take_zh||a.take_en||'');
   }
   return L.join('\n');
 }
@@ -162,17 +144,18 @@ function toast(msg){
   setTimeout(()=>t.classList.add('out'),1500);
   setTimeout(()=>{if(t.parentNode)t.remove()},1900);
 }
-async function shareArticle(topic,idx){
-  const a=DATA&&DATA[topic]&&DATA[topic].articles&&DATA[topic].articles[idx-1];
+async function shareArticle(idx){
+  const a=DATA&&DATA.design&&DATA.design.articles&&DATA.design.articles[idx-1];
   if(!a)return;
   const url=safeUrl(a.url);
-  const payload={title:a.title_zh||'Daily Digest',text:fmtShare(topic,a),url:url==='#'?location.href:url};
+  const title=document.body.dataset.lang==='en'?(a.title_en||a.title_zh):(a.title_zh||a.title_en);
+  const payload={title:title||'Daily Digest',text:fmtShare(a),url:url==='#'?location.href:url};
   if(navigator.share){
     try{await navigator.share(payload)}catch(e){/* user cancelled */}
   }else{
     try{
       await navigator.clipboard.writeText(payload.text+'\n\n'+payload.url);
-      toast('此瀏覽器不支援分享，已複製到剪貼簿');
+      toast(document.body.dataset.lang==='en'?'Browser does not support sharing — copied to clipboard':'此瀏覽器不支援分享，已複製到剪貼簿');
     }catch(e){toast('分享失敗')}
   }
 }
@@ -187,93 +170,74 @@ function render(data){
   const tabsEl=document.getElementById('tabs');
   const cardsEl=document.getElementById('cards');
 
-  function renderTake(topic){
-    const t=data[topic].take;
-    const isZhOnly=topic==='invest';
-    const ac=isZhOnly?`<span class="ac">本日總經觀察</span>`:`<span class="ac zh">本日趨勢觀察</span><span class="ac en">Daily Take</span>`;
-    const disclaimer=isZhOnly?`<div class="disclaimer">※ 僅為事件解讀與趨勢脈絡，不構成投資建議</div>`:'';
-    const h2=isZhOnly?`<h2>${esc(t.title_zh)}</h2>`:`<h2 class="zh">${esc(t.title_zh)}</h2><h2 class="en">${esc(t.title_en||'')}</h2>`;
-    // 自 No. 007 起：design 的 body 也只生中文，無 .zh/.en class，永遠顯示
-    const body=`<div class="trend">${paragraphs(t.body_zh)}</div>`;
-    return `<article class="card t-${topic}" data-topic="${topic}" data-i="${topic[0]}0">
+  if(!data.design||!Array.isArray(data.design.articles)){
+    root.innerHTML=`<div class="err">資料格式錯誤<br>Missing design.articles</div>`;
+    return;
+  }
+
+  function renderTake(){
+    const t=data.design.take||{};
+    const ac=`<span class="ac zh">本日趨勢觀察</span><span class="ac en">Daily Take</span>`;
+    const h2=`<h2 class="zh">${esc(t.title_zh||'')}</h2><h2 class="en">${esc(t.title_en||t.title_zh||'')}</h2>`;
+    const body=`<div class="trend zh">${paragraphs(t.body_zh||'')}</div><div class="trend en">${paragraphs(t.body_en||t.body_zh||'')}</div>`;
+    return `<article class="card" data-i="0">
       <div class="meta"><span class="dot tr"></span>${ac}<span class="sep">/</span><span>${esc(data.date.slice(5))}</span></div>
-      ${h2}<div class="rule"></div>${disclaimer}${body}
+      ${h2}<div class="rule"></div>${body}
     </article>`;
   }
 
-  function renderArticle(topic,a,idx){
-    const isZhOnly=topic==='invest';
+  function renderArticle(a,idx){
     const cls=P_CLASS[a.priority]||'p4';
     const catZh=a.category_zh||a.category||'';
     const catEn=a.category_en||a.category||'';
     const typeZh=a.type_zh||a.type||'文章';
     const typeEn=a.type_en||a.type||'Article';
-    const meta=isZhOnly
-      ? `<span class="dot ${cls}"></span><span class="ac">${esc(a.priority)} · ${esc(catZh)}</span><span class="sep">/</span><span>${esc(typeZh)}</span><span class="sep">/</span><span>${esc(a.lang||'ZH')}</span><span class="sep">/</span><span>${esc(a.source)} · ${esc(a.date)}</span>`
-      : `<span class="dot ${cls}"></span><span class="ac">${esc(a.priority)} · <span class="zh">${esc(catZh)}</span><span class="en">${esc(catEn)}</span></span><span class="sep">/</span><span class="zh">${esc(typeZh)}</span><span class="en">${esc(typeEn)}</span><span class="sep">/</span><span>${esc(a.lang||'EN')}</span><span class="sep">/</span><span>${esc(a.source)} · ${esc(a.date)}</span>`;
-    const h2=isZhOnly?`<h2>${esc(a.title_zh)}</h2>`:`<h2 class="zh">${esc(a.title_zh)}</h2><h2 class="en">${esc(a.title_en||a.title_zh)}</h2>`;
-    // 自 No. 007 起：summary / take 都只生中文，永遠顯示（語言切換只影響短標籤）
-    const sum=`<p class="sum">${esc(a.summary_zh)}</p>`;
-    const take=`<p class="take">${esc(a.take_zh)}</p>`;
+    const meta=`<span class="dot ${cls}"></span><span class="ac">${esc(a.priority)} · <span class="zh">${esc(catZh)}</span><span class="en">${esc(catEn)}</span></span><span class="sep">/</span><span class="zh">${esc(typeZh)}</span><span class="en">${esc(typeEn)}</span><span class="sep">/</span><span>${esc(a.lang||'EN')}</span><span class="sep">/</span><span>${esc(a.source)} · ${esc(a.date)}</span>`;
+    const h2=`<h2 class="zh">${esc(a.title_zh||a.title_en||'')}</h2><h2 class="en">${esc(a.title_en||a.title_zh||'')}</h2>`;
+    const sum=`<p class="sum zh">${esc(a.summary_zh||a.summary_en||'')}</p><p class="sum en">${esc(a.summary_en||a.summary_zh||'')}</p>`;
+    const take=`<p class="take zh">${esc(a.take_zh||a.take_en||'')}</p><p class="take en">${esc(a.take_en||a.take_zh||'')}</p>`;
     const host=urlHost(a.url);
     const hostCls=host==='⚠ invalid url'?'urlhost bad':'urlhost';
-    const link=isZhOnly?`<a class="link" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">閱讀原文 →</a><span class="${hostCls}">${esc(host)}</span>`:`<a class="link zh" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">閱讀原文 →</a><a class="link en" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">Read article →</a><span class="${hostCls}">${esc(host)}</span>`;
-    const share=`<div><button class="share" data-t="${topic}" data-idx="${idx}"><span class="zh">分享（含摘要 & 觀點）</span><span class="en">Share with summary & take</span></button></div>`;
-    return `<article class="card t-${topic}" data-topic="${topic}" data-i="${topic[0]}${idx}">
+    const link=`<a class="link zh" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">閱讀原文 →</a><a class="link en" href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener">Read article →</a><span class="${hostCls}">${esc(host)}</span>`;
+    const share=`<div><button class="share" data-idx="${idx}"><span class="zh">分享（含摘要 & 觀點）</span><span class="en">Share with summary & take</span></button></div>`;
+    return `<article class="card" data-i="${idx}">
       <div class="meta">${meta}</div>${h2}<div class="rule"></div>${sum}${take}${link}${share}
     </article>`;
   }
 
-  function renderTab(topic,a,idx){
+  function renderTab(a,idx){
     const isTrend=idx===0;
     const pri=isTrend?'◇':String(idx).padStart(2,'0');
-    const shortZh=isTrend?(topic==='invest'?'本日總經':'本日趨勢'):(a.tab_short_zh||esc(a.title_zh).slice(0,8));
-    const shortEn=isTrend?(topic==='invest'?'Macro':'Today'):(a.tab_short_en||a.tab_short_zh||'');
-    const content=topic==='invest'
-      ? `<span class="pri">${pri}</span><span>${esc(shortZh)}</span>`
-      : `<span class="pri">${pri}</span><span class="zh">${esc(shortZh)}</span><span class="en">${esc(shortEn)}</span>`;
-    return `<button class="tab t-${topic}" data-topic="${topic}" data-i="${topic[0]}${idx}">${content}</button>`;
+    const shortZh=isTrend?'本日趨勢':(a.tab_short_zh||esc(a.title_zh||a.title_en||'').slice(0,8));
+    const shortEn=isTrend?'Today':(a.tab_short_en||a.tab_short_zh||'');
+    return `<button class="tab" data-i="${idx}"><span class="pri">${pri}</span><span class="zh">${esc(shortZh)}</span><span class="en">${esc(shortEn)}</span></button>`;
   }
 
-  // Build tabs + cards for invest then design (DOM order matches topic switcher)
-  let tabsHtml='',cardsHtml='';
-  ['invest','design'].forEach(topic=>{
-    const t=data[topic];
-    tabsHtml+=renderTab(topic,null,0);
-    cardsHtml+=renderTake(topic);
-    (t.articles||[]).forEach((a,i)=>{
-      tabsHtml+=renderTab(topic,a,i+1);
-      cardsHtml+=renderArticle(topic,a,i+1);
-    });
+  let tabsHtml=renderTab(null,0),cardsHtml=renderTake();
+  data.design.articles.forEach((a,i)=>{
+    tabsHtml+=renderTab(a,i+1);
+    cardsHtml+=renderArticle(a,i+1);
   });
   tabsEl.innerHTML=tabsHtml;
   cardsEl.innerHTML=cardsHtml;
 
-  document.querySelector('[data-cnt="design"]').textContent=1+(data.design.articles||[]).length;
-  document.querySelector('[data-cnt="invest"]').textContent=1+(data.invest.articles||[]).length;
-
-  // Activate first of default topic
-  const defaultTopic=data.defaultTopic||'invest';
-  document.body.dataset.topic=defaultTopic;
-  document.querySelectorAll('#topicsw button').forEach(x=>x.classList.toggle('on',x.dataset.t===defaultTopic));
   wire();
   go(0);
 }
 
-let cur=0,topic='invest';
-function list(){return Array.from(document.querySelectorAll('.tab[data-topic="'+topic+'"]'))}
-function cards(){return Array.from(document.querySelectorAll('.card[data-topic="'+topic+'"]'))}
+let cur=0;
+function list(){return Array.from(document.querySelectorAll('.tab'))}
+function cards(){return Array.from(document.querySelectorAll('.card'))}
 function go(i){
   const L=list(),C=cards(),n=L.length;if(!n)return;
   if(i<0)i=n-1;if(i>=n)i=0;cur=i;
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
+  L.forEach(t=>t.classList.remove('active'));
+  C.forEach(c=>c.classList.remove('active'));
   L[i].classList.add('active');C[i].classList.add('active');
   L[i].scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
   window.scrollTo({top:0,behavior:'instant'});
 }
 function wire(){
-  topic=document.body.dataset.topic;
   document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
     const L=list();const idx=L.indexOf(t);if(idx>=0)go(idx);
   }));
@@ -301,18 +265,7 @@ function wire(){
     const b=e.target.closest('.share');
     if(!b)return;
     e.preventDefault();
-    shareArticle(b.dataset.t,+b.dataset.idx);
-  });
-  document.getElementById('topicsw').addEventListener('click',e=>{
-    const b=e.target.closest('button');if(!b)return;
-    topic=b.dataset.t;document.body.dataset.topic=topic;
-    document.querySelectorAll('#topicsw button').forEach(x=>x.classList.toggle('on',x.dataset.t===topic));
-    if(topic==='invest'&&document.body.dataset.lang==='en'){
-      document.body.dataset.lang='zh';
-      document.querySelectorAll('#langsw button').forEach(x=>x.classList.toggle('on',x.dataset.l==='zh'));
-      document.documentElement.lang='zh-TW';
-    }
-    go(0);
+    shareArticle(+b.dataset.idx);
   });
 }
 
