@@ -22,7 +22,7 @@
         "tab_short_en": "Gemini 4",
         "title_zh": "Google 發表 Gemini 4 Carbon，僅開放資安專家使用",
         "title_en": "Google Unveils Gemini 4 Carbon, Limited to Cyber Defense Experts",
-        "summary_zh": "Google 於 10/28 發表 Gemini 4 Carbon，稱是旗下最強模型，擅長找出並修補軟體漏洞，也能執行長達數天的長時間任務。目前僅開放給特定資安防禦專家，Gemini app 與 API 何時開放尚無時程。Google 自述它以 59 分居 Artificial Analysis Intelligence Index v5.0 第一。",
+        "summary_zh": "Google 於 10/28 發表 Gemini 4 Carbon，稱是旗下最強模型，擅長找出並修補軟體漏洞，也能執行長達數天的任務。目前僅開放給特定資安專家，Gemini app 與 API 尚無時程。Google 自述它以 59 分居 Artificial Analysis Intelligence Index v5.0 第一。",
         "summary_en": "Google announced Gemini 4 Carbon on October 28, calling it its most powerful model. It is built to excel at finding and fixing software vulnerabilities and at long-running tasks that last for days. Access is limited to a select group of cyber defense experts, with no timeline for the Gemini app or API. Google reports it ranks first on the Artificial Analysis Intelligence Index v5.0 with 59 points, a figure that comes from the company itself.",
         "take_zh": "最強模型不再先給大眾，而是先給資安專家，代表頂級能力開始採分級釋出。設計師短期用不到，但該留意往後新功能可能都有資格門檻。",
         "take_en": "The strongest model now goes to security specialists before the public, which suggests top-tier capability is becoming gated. Designers will not touch it soon, but should expect access tiers to shape which features reach their tools, and when.",
